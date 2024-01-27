@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import convertCurrency from "../utilities/convertCurrency"
 
-const Converter = ({bitData}) => {
+const Converter = ({bitData, isLoading}) => {
     const [inputValue, setInputValue] = useState("") 
     const [currency, setCurrency] = useState("")
     const [currencyResult, setCurrencyResult] = useState(0)
@@ -31,7 +31,8 @@ const Converter = ({bitData}) => {
         }
     }
 
-    return(
+    return !isLoading ? (
+            
         <div className="flex items-center justify-center bg-blue-400 w-full h-auto">
             <div className="flex flex-col items-center justify-center">
                  <form action="" className="flex flex-row items-center justify-center gap-2">
@@ -49,16 +50,18 @@ const Converter = ({bitData}) => {
                         required
                         onChange={(e) => {handleCurrencyChange(e)}}
                     >
-                        <MenuItem value={'BHT'}>BHT</MenuItem>
-                        <MenuItem value={'GBP'}>GBP</MenuItem>
-                        <MenuItem value={'USD'}>USD</MenuItem>
+                        {Object.values(bitData).map((item) => {
+                            return <MenuItem value={item.symbol}>{item.symbol}</MenuItem>
+                        })}
+                
                     </Select>
                     </div>
                     <button onClick={(e) => {handleSubmit(e,currency,inputValue)}} className="button-66 self-end"value={inputValue}>Convert</button>
                  </form>
             </div>
         </div>
-    )
+    ) :
+    <h1>Loading...</h1>
 
 }
 

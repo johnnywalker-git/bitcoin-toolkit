@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import getTickerData from "../utilities/getTickerData";
 import Tickerchild from "./TickerChild";
 
-const Ticker = ({bitData, setBitData}) => {
+const Ticker = ({bitData, setBitData, isLoading, setIsLoading}) => {
     const [fetchTrigger, setFetchTrigger] = useState(true)
 
     useEffect(() => {
@@ -10,6 +10,7 @@ const Ticker = ({bitData, setBitData}) => {
             try {
                 const result = await getTickerData()
                 setBitData(result)
+                setIsLoading((prev) => {!prev})
             } catch (error) {
                 console.log("error", error.response)
             }

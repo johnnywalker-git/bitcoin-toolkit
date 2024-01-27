@@ -6,12 +6,12 @@ import Converter from './components/Converter'
 
 function App() {
   const [bitData, setBitData] = useState({})
-  const [isLoading, setLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
 
   return (
         <div className='flex flex-col justify-center items-center'>
           <Header />
-          <Ticker bitData={bitData} setBitData={setBitData} isLoading={isLoading} setLoading={setLoading}/>
+          <Ticker bitData={bitData} setBitData={setBitData} isLoading={isLoading} setIsLoading={setIsLoading}/>
           <Converter bitData={bitData} isLoading={isLoading}/>
         </div>
   )
