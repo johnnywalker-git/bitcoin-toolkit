@@ -19,7 +19,7 @@ const Tickerchild = ({ data }) => {
             <Icon icon="gridicons:dropdown" color="white" onClick={getExtraData} className='w-1/5' rotate={isOpen && "2"}/>
         </div>
     {
-        isOpen &&  <div className='flex flex-col items-center place-content-between'>
+        isOpen &&  <div className={`flex flex-col items-center place-content-between`}>
             <div className='flex place-content-between w-2/3'>
             <p className='text-xs text-blue-300'>Last</p>
             <p className='text-xs'>{data.last}</p>

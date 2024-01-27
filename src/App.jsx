@@ -11,8 +11,8 @@ function App() {
   return (
         <div className='flex flex-col justify-center items-center'>
           <Header />
-          <Ticker bitData={bitData} setBitData={setBitData} isLoading={isLoading} setIsLoading={setIsLoading}/>
           <Converter bitData={bitData} isLoading={isLoading}/>
+          <Ticker bitData={bitData} setBitData={setBitData} isLoading={isLoading} setIsLoading={setIsLoading}/>
         </div>
   )
 }

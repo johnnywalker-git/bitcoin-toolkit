@@ -9,27 +9,35 @@ const Converter = ({bitData, isLoading}) => {
     const [inputValue, setInputValue] = useState("") 
     const [currency, setCurrency] = useState("")
     const [currencyResult, setCurrencyResult] = useState(0)
+    const[error, setError] = useState(false)
 
-    const handleChange = (e) => {
+    
+    const handleAmountChange = (e) => {
         e.preventDefault()
         setInputValue(e.target.value)
     }
-
+  
     const handleCurrencyChange = (e) => {
         e.preventDefault()
         setCurrency(e.target.value)
       };
+    
 
     const handleSubmit = async (e,currency, amount) => {
         e.preventDefault()
+        if(amount >= 0 ){
         try {
             const bitResult = await convertCurrency(currency,amount)
             setCurrencyResult(bitResult)
             console.log(bitResult, "results")
         } catch (error) {
             console.log(error.response)
+        }}
+        else {
+            setError((prev) => !prev)
         }
     }
+
 
     return !isLoading ? (
             
@@ -38,7 +46,7 @@ const Converter = ({bitData, isLoading}) => {
                  <form action="" className="flex flex-row items-center justify-center gap-2">
                     <div className="flex flex-col"> 
                     <InputLabel id="demo-simple-select-label">Amount</InputLabel>
-                    <TextField id="outlined-basic" label="Insert Amount" onChange={(e) => {handleChange(e)}}/>
+                    <TextField id="outlined-basic" label="Insert Amount" onChange={(e) => {handleAmountChange(e)}}/>
                     </div>
                     <div className="flex flex-col"> 
                     <InputLabel id="demo-simple-select-label" required>Currency</InputLabel>
@@ -51,13 +59,30 @@ const Converter = ({bitData, isLoading}) => {
                         onChange={(e) => {handleCurrencyChange(e)}}
                     >
                         {Object.values(bitData).map((item) => {
-                            return <MenuItem value={item.symbol}>{item.symbol}</MenuItem>
+                            return <MenuItem key={item.symbol}value={item.symbol}>{item.symbol}</MenuItem>
                         })}
                 
                     </Select>
                     </div>
                     <button onClick={(e) => {handleSubmit(e,currency,inputValue)}} className="button-66 self-end"value={inputValue}>Convert</button>
                  </form>
+
+
+                  {() => { 
+                    
+                    if(error) {
+                        return  <h1>Error state</h1>
+                    }
+
+                    else {
+                        return(
+                            <div className="results">
+                            <p>Your Currency of {inputValue} {currency} is currently worth {currencyResult} BTC</p>
+                         </div> 
+                        )
+                    } }}
+               
+
             </div>
         </div>
     ) :

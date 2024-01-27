@@ -25,7 +25,8 @@ const Ticker = ({bitData, setBitData, isLoading, setIsLoading}) => {
 
      clearInterval(intervalRefresh)
     
-    return(
+    return !isLoading ? (
+
         <div className="flex flex-col items-center mt-2">
         <h2 className="text-xl">Current Values of BTC</h2>
         <div className="grid grid-cols-2 lg:grid-cols-4 md:lg:grid-cols-4 bg-blue-200 m-2 p-2 border rounded">
@@ -34,7 +35,8 @@ const Ticker = ({bitData, setBitData, isLoading, setIsLoading}) => {
             })}
         </div>
         </div>
-    )
+    ) :
+    <h1>Loading</h1>
 }
 
 export default Ticker;
