@@ -4,12 +4,15 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import convertCurrency from "../utilities/convertCurrency"
+import FormHelperText from '@mui/material/FormHelperText';
+
 
 const Converter = ({bitData, isLoading}) => {
     const [inputValue, setInputValue] = useState("") 
     const [currency, setCurrency] = useState("")
     const [currencyResult, setCurrencyResult] = useState(0)
     const[error, setError] = useState(false)
+    const[currencyError,setCurrencyError] = useState(false)
 
     
     const handleAmountChange = (e) => {
@@ -25,19 +28,23 @@ const Converter = ({bitData, isLoading}) => {
 
     const handleSubmit = async (e,currency, amount) => {
         e.preventDefault()
-        if(parseFloat(amount) > 0){
+        if(parseFloat(amount) > 0 && currency){
         try {
             const bitResult = await convertCurrency(currency,amount)
             setCurrencyResult(bitResult)
             setError((prev) => {!prev})
+            setCurrencyError(false)
         } catch (error) {
             console.log(error.response)
         }}
+        else if(parseFloat(amount) > 0 && !currency) {
+            setCurrencyError(true)
+        }
         else {
             setError((prev) => !prev)
         }
     }
-
+    console.log(currencyError)
 
     return !isLoading ? (
             
@@ -46,16 +53,16 @@ const Converter = ({bitData, isLoading}) => {
                  <form className="flex flex-row items-center justify-center gap-2">
                     <div className="flex flex-col"> 
                     <InputLabel id="demo-simple-select-label">Amount</InputLabel>
-                    <TextField id="outlined-basic" aria-label="amount input box"onChange={(e) => {handleAmountChange(e)}}/>
+                    <TextField required helperText={error ? "Amount must be more than 0.00" : ""} error={error} id="outlined-basic" aria-label="amount input box"onChange={(e) => {handleAmountChange(e)}}/>
                     </div>
                     <div className="flex flex-col"> 
-                    <InputLabel id="demo-simple-select-label" required>Currency</InputLabel>
+                    <InputLabel id="currency-label" defaultValue="Hello World">Currency</InputLabel>
                     <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
+                        labelId="select-label"
+                        id="select"
                         value={currency}
                         label="Currency"
-                        required
+                        error={currencyError}
                         onChange={(e) => {handleCurrencyChange(e)}}
                     >
                     /*Select menu items from BTC data./*
@@ -63,6 +70,8 @@ const Converter = ({bitData, isLoading}) => {
                         return <MenuItem key={item.symbol}value={item.symbol}>{item.symbol}</MenuItem>
                     })}
                     </Select>
+                    <FormHelperText id="demo-simple-select-error-label">{currencyError ? "Select a currency" : ""}</FormHelperText>
+
                     </div>
                     <button onClick={(e) => {handleSubmit(e,currency,inputValue)}} className="button-66 self-end"value={inputValue}>Convert</button>
                  </form>
@@ -74,13 +83,6 @@ const Converter = ({bitData, isLoading}) => {
                     ):
                     null
                     }
-                   
-                    {
-                        error && (
-                           <p>Invalid input amount: amount must be more than 0.00</p>
-                        )
-                    }
-
             </div>
         </div>
     ) :
