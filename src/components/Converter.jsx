@@ -44,19 +44,19 @@ const Converter = ({bitData, isLoading}) => {
             setError((prev) => !prev)
         }
     }
-    console.log(currencyError)
-
+    
     return !isLoading ? (
             
-        <div className="flex items-center justify-center bg-blue-400 w-full h-auto">
-            <div className="flex flex-col items-center justify-center">
-                 <form className="flex flex-row items-center justify-center gap-2">
+        <div className="flex items-center justify-center w-full p-5 h-auto">
+            <div className="flex flex-col items-center justify-center place-items-center m-5 bg-blue-400 p-5 rounded-lg border drop-shadow-md">
+                <div><h2 className="text-xl text-blue-900 w-auto font-bold">BTC Converter</h2></div>
+                 <form className="flex flex-row items-center justify-center gap-2 m-2">
                     <div className="flex flex-col"> 
                     <InputLabel id="demo-simple-select-label">Amount</InputLabel>
                     <TextField required helperText={error ? "Amount must be more than 0.00" : ""} error={error} id="outlined-basic" aria-label="amount input box"onChange={(e) => {handleAmountChange(e)}}/>
                     </div>
                     <div className="flex flex-col"> 
-                    <InputLabel id="currency-label" defaultValue="Hello World">Currency</InputLabel>
+                    <InputLabel id="currency-label" defaultValue="Hello World" >Currency</InputLabel>
                     <Select
                         labelId="select-label"
                         id="select"
@@ -71,14 +71,13 @@ const Converter = ({bitData, isLoading}) => {
                     })}
                     </Select>
                     <FormHelperText id="demo-simple-select-error-label">{currencyError ? "Select a currency" : ""}</FormHelperText>
-
                     </div>
-                    <button onClick={(e) => {handleSubmit(e,currency,inputValue)}} className="button-66 self-end"value={inputValue}>Convert</button>
-                 </form>
+                    </form>
+                    <button onClick={(e) => {handleSubmit(e,currency,inputValue)}} className="button-66 self-center mt-5"value={inputValue}>Convert</button>
                   
                     { currencyResult && !error ? (
-                        <div className="results">
-                        <p>Your Currency of {parseFloat(inputValue).toFixed(2)} {currency} is currently worth {currencyResult} BTC</p>
+                        <div className="results w-full flex justify-center p-2 text-xl bg-blue-800 m-2 text-white rounded-xl">
+                        <p>{currencyResult} BTC</p>
                         </div>
                     ):
                     null
