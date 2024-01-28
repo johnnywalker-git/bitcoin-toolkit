@@ -13,8 +13,8 @@ const Converter = ({bitData, isLoading}) => {
     const [inputValue, setInputValue] = useState("") 
     const [currency, setCurrency] = useState("")
     const [currencyResult, setCurrencyResult] = useState(0)
-    const[error, setError] = useState(false)
-    const[currencyError,setCurrencyError] = useState(false)
+    const [error, setError] = useState(false)
+    const [currencyError,setCurrencyError] = useState(false)
 
     
     const handleAmountChange = (e) => {
