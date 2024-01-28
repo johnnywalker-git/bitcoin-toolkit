@@ -8,6 +8,8 @@ It also has a feature to take an input value and a currency and return the value
 Live preview...
 https://bitcoin-toolkit.netlify.app/
 
+![App Screenshot](https://github.com/johnnywalker-git/bitcoin-toolkit/blob/main/Readme-screenshots/application.jpg?raw=true)
+
 
 ## User stories
 
