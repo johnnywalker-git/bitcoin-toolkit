@@ -85,19 +85,6 @@ The second component is a table of each of the currencies allowed by the endpoin
 This component does the initial fetch for data, and passes it to the parent. This allows the converter component to iterate over the currencies for the drop-down selection menu.
 
 
-## Challenges
-
-I did face some challenges when making this application...
-
-- Refreshing data.
-I tried to incorporate a setInterval in my useEffect, in order to bring the data from the endpoint at set intervals, thus keeping the component refreshed with the newest values. I am not sure if this worked and is something I am looking to fix in the future. 
-
-When initally making the application i looked into using websockets which may be a better solution. Although I don't have ample experience with this yet it is something I am looking in to implementing.
-
-- Testing
-I can see the benefits that testing would bring to this application, as I was manually testing it throughout, I would like to think that an automated unit-test suite such as Cypress would not only speed this up, but also make the output of the functions more robust and give more confidence that the app is working as expected.
-
-I am also aware that if this application was going to production then intergrating end-to-end tests into the CI/CD pipeline would decrease possible bugs.
 
 
 ## Challenges
