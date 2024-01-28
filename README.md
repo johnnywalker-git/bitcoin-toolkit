@@ -9,7 +9,6 @@ Live preview...
 https://bitcoin-toolkit.netlify.app/
 
 
-
 ## User stories
 
 I based the functionality of my application on the following user stories...
