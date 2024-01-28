@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import getTickerData from "../utilities/getTickerData";
 import Tickerchild from "./TickerChild";
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 const Ticker = ({bitData, setBitData, isLoading, setIsLoading}) => {
     const [fetchTrigger, setFetchTrigger] = useState(true)
@@ -36,7 +38,8 @@ const Ticker = ({bitData, setBitData, isLoading, setIsLoading}) => {
         </div>
         </div>
     ) :
-    <h1>Loading</h1>
+    <CircularProgress />
+
 }
 
 export default Ticker;

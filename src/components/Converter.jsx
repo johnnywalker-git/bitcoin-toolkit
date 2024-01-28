@@ -5,6 +5,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import convertCurrency from "../utilities/convertCurrency"
 import FormHelperText from '@mui/material/FormHelperText';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 
 const Converter = ({bitData, isLoading}) => {
@@ -85,7 +87,8 @@ const Converter = ({bitData, isLoading}) => {
             </div>
         </div>
     ) :
-    <h1>Loading...</h1>
+    <CircularProgress />
+
 
 }
 
