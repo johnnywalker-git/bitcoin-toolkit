@@ -62,10 +62,10 @@ As it was relitvely simple, I used a `Figjam` board to quikcly collect my ideas.
 
 ## Installation
 
-Install my-project with npm
+
 
 ```bash
-  Fork Repo
+  fork Repo
   npm install 
   npm run dev
   
