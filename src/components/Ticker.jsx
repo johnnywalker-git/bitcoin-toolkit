@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import getTickerData from "../utilities/getTickerData";
 import Tickerchild from "./TickerChild";
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 const Ticker = ({bitData, setBitData, isLoading, setIsLoading}) => {
     const [fetchTrigger, setFetchTrigger] = useState(true)
@@ -17,26 +19,27 @@ const Ticker = ({bitData, setBitData, isLoading, setIsLoading}) => {
         } 
         bitcoinData()
 
+        const intervalRefresh = setInterval(() => {
+            setFetchTrigger((prev) => {!prev}, 30000)
+        })
+    
+        return () => clearInterval(intervalRefresh)
+        
     }, [fetchTrigger])
 
-    const intervalRefresh = setInterval(() => {
-        setFetchTrigger((prev) => {!prev}, 3000)
-    })
-
-     clearInterval(intervalRefresh)
-    
     return !isLoading ? (
 
-        <div className="flex flex-col items-center mt-2">
-        <h2 className="text-xl">Current Values of BTC</h2>
-        <div className="grid grid-cols-2 lg:grid-cols-4 md:lg:grid-cols-4 bg-blue-200 m-2 p-2 border rounded">
+        <div className="flex flex-col items-center mt-2 justify-center mb-5">
+        <h2 className="text-xl w-full text-center bg-blue-800 rounded m-2 mb-0 p-2 w-full text-white text-s font-bold">Current Values of BTC</h2>
+        <div className="grid grid-cols-2 lg:grid-cols-4 md:lg:grid-cols-4 bg-blue-200 m-2 mt-0 p-2 w-full border rounded">
             {Object.values(bitData).map((data) => {
              return <Tickerchild key={data.symbol} data={data}/>
             })}
         </div>
         </div>
     ) :
-    <h1>Loading</h1>
+    <CircularProgress />
+
 }
 
 export default Ticker;
